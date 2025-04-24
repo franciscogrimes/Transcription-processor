@@ -1,6 +1,5 @@
 const axios = require('axios');
 const https = require('https');
-const CONFIG = require('../utils/config');
 
 
 const { obterDataAtual } = require('../utils/dateUtils');
