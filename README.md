@@ -39,17 +39,15 @@ Para esse processo, ele realiza o seguinte passo a passo:
 4. **Configuração de variáveis de ambiente**
    
 - Crie um arquivo .env na raiz do projeto contendo:
-- FOLDER_ID=SEU_FOLDER_ID_AQUI
-- SENSEDATA_TOKEN=SEU_TOKEN_SENSEDATA_AQUI
-- Coloque o arquivo JSON de credenciais de conta de serviço em src/credentials.json (veja abaixo como criar).
+   - FOLDER_ID=SEU_FOLDER_ID_AQUI
+   - SENSEDATA_TOKEN=SEU_TOKEN_SENSEDATA_AQUI
+   - Coloque o arquivo JSON de credenciais de conta de serviço em src/credentials.json (veja abaixo como criar).
 
 5. **Execução**
 
 - Modo desenvolvimento (com reinício automático):
 
 ```bash
-  Copiar
-  Editar
   npm run start:dev
 ```
 
