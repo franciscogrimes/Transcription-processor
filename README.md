@@ -1,6 +1,5 @@
 # Transcription processor
 
-## Objetivo do Projeto
 Este projeto foi desenvolvido com o intuito de armazenar as transcrições do Tactiq, dentro de uma aplicação para registros de reuniões. No caso desse em específico, o local para o armaenamento da transcrição foi o Sensedata, podendo ser replicado para outras aplicações caso necessário.
 Contudo, o Tactiq não oferece uma API pública para integrações diretas. Então, foi utilizado uma integração nativa da solução com o google drive, que posteriormente segue um processo de integração.
 
@@ -40,18 +39,13 @@ Para esse processo, ele realiza o seguinte passo a passo:
 4. **Configuração de variáveis de ambiente**
    
 - Crie um arquivo .env na raiz do projeto contendo:
+- FOLDER_ID=SEU_FOLDER_ID_AQUI
+- SENSEDATA_TOKEN=SEU_TOKEN_SENSEDATA_AQUI
+- Coloque o arquivo JSON de credenciais de conta de serviço em src/credentials.json (veja abaixo como criar).
 
-# ID da pasta no Google Drive a ser monitorada
-FOLDER_ID=SEU_FOLDER_ID_AQUI
+##Execução
 
-# Token de acesso à API do SenseData
-SENSEDATA_TOKEN=SEU_TOKEN_SENSEDATA_AQUI
-Credenciais do Google
-Coloque o arquivo JSON de credenciais de conta de serviço em src/credentials.json (veja abaixo como criar).
-
-Execução
-
-Modo desenvolvimento (com reinício automático):
+- Modo desenvolvimento (com reinício automático):
 
 ```bash
   Copiar
@@ -59,7 +53,7 @@ Modo desenvolvimento (com reinício automático):
   npm run start:dev
 ```
 
-Modo produção:
+- Modo produção:
 
 ```bash
   npm run start:prod
