@@ -43,7 +43,7 @@ Para esse processo, ele realiza o seguinte passo a passo:
 - SENSEDATA_TOKEN=SEU_TOKEN_SENSEDATA_AQUI
 - Coloque o arquivo JSON de credenciais de conta de serviço em src/credentials.json (veja abaixo como criar).
 
-##Execução
+5. **Execução**
 
 - Modo desenvolvimento (com reinício automático):
 
@@ -58,7 +58,8 @@ Para esse processo, ele realiza o seguinte passo a passo:
 ```bash
   npm run start:prod
 ```
-**Como Criar as Credenciais da Google**
+
+## Como Criar as Credenciais da Google**
   
   1. **Acesse o Google Cloud Console:**
   
