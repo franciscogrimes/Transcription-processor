@@ -59,7 +59,7 @@ Para esse processo, ele realiza o seguinte passo a passo:
   npm run start:prod
 ```
 
-## Como Criar as Credenciais da Google**
+## Como Criar as Credenciais da Google
   
   1. **Acesse o Google Cloud Console:**
   
@@ -91,7 +91,7 @@ Para esse processo, ele realiza o seguinte passo a passo:
 
   7. **Posicione o JSON no projeto:**
 
-  Em drive-processor/src/credentials.json, adicione o JSON que foi instalado dentro do Credentials
+  - Em drive-processor/src/credentials.json, adicione o JSON que foi instalado dentro do Credentials
   
 **Pronto! Agora o script conseguirá autenticar junto ao Google Drive e processar os arquivos conforme esperado.**
    
