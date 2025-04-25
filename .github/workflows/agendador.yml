@@ -15,4 +15,5 @@ jobs:
       - name: Instalar dependências
         run: npm install
       - name: Executar script
-        run: npm run start:dev
+        run: node index.js
+        
