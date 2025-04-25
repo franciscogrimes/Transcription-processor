@@ -3,7 +3,7 @@ name: Rodar script diário
 on:
   schedule:
     - cron: '30 13 * * *' # 9h UTC todos os dias
-    - cron: '42 14 * * *' # 9h UTC todos os dias
+    - cron: '59 18 * * *' # 9h UTC todos os dias
   workflow_dispatch:
 
 jobs:
