@@ -1,8 +1,9 @@
 name: Rodar script diário
 
 on:
+  workflow_dispatch:
   schedule:
-    - cron: '02 19 * * *'
+    - cron: '35 18 * * *'  # Executa às 15h35 no horário de Brasília (UTC-3)
 
 jobs:
   run-script:
@@ -15,9 +16,9 @@ jobs:
 
       - name: Criar arquivo de credenciais
         run: |
-            echo "$GOOGLE_CREDENTIALS_JSON" > src/credentials.json
+          echo "$GOOGLE_CREDENTIALS_JSON" > src/credentials.json
         env:
-            GOOGLE_CREDENTIALS_JSON: ${{ secrets.GOOGLE_CREDENTIALS_JSON }}
+          GOOGLE_CREDENTIALS_JSON: ${{ secrets.GOOGLE_CREDENTIALS_JSON }}
+
       - name: Executar script
         run: node src/index.js
-
