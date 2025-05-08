@@ -55,6 +55,60 @@ async function extractTextFromGoogleDoc(fileId, fileName) {
     }
 }
 
+function extractTranscription(fullText) {
+    if (!fullText) {
+        console.log("Texto vazio ou nulo fornecido");
+        return null;
+    }
+    
+    // Converte para string caso não seja
+    const textStr = String(fullText);
+    
+    // Divide o texto em linhas e remove linhas vazias
+    const lines = textStr.split('\n').map(line => line.trim()).filter(line => line.length > 0);
+    
+    // Primeiro, encontramos a seção "Highlights"
+    let highlightsIndex = -1;
+    for (let i = 0; i < lines.length; i++) {
+        if (lines[i].toLowerCase().includes('**highlights**') || 
+            lines[i].toLowerCase() === 'highlights') {
+            highlightsIndex = i;
+            break;
+        }
+    }
+    
+    if (highlightsIndex === -1) {
+        console.log("Marcador 'Highlights' não encontrado no texto");
+        return null;
+    }
+    
+    // Agora procuramos pelo marcador "Transcript" que vem APÓS "Highlights"
+    let transcriptStartIndex = -1;
+    for (let i = highlightsIndex + 1; i < lines.length; i++) {
+        if (lines[i].toLowerCase().includes('**transcript**') || 
+            lines[i].toLowerCase() === 'transcript') {
+            transcriptStartIndex = i;
+            break;
+        }
+    }
+    
+    if (transcriptStartIndex === -1) {
+        console.log("Marcador 'Transcript' após 'Highlights' não encontrado");
+        return null;
+    }
+    
+    // O conteúdo da transcrição começa após a linha do marcador "Transcript"
+    const transcriptContent = lines.slice(transcriptStartIndex + 1);
+    
+    if (transcriptContent.length === 0) {
+        console.log("'Transcript' encontrado após 'Highlights', mas nenhum conteúdo subsequente detectado");
+        return null;
+    }
+    
+    // Retorna as linhas da transcrição como uma única string
+    return transcriptContent.join('\n');
+}
+
 function extractShortSummary(fullText) {
     if (!fullText) {
         return null;
@@ -74,7 +128,6 @@ function extractShortSummary(fullText) {
     }
 
     if (!foundSummaryStart) {
-        console.log("  -> Marcador 'Short summary' não encontrado no texto.");
         return null;
     }
 
@@ -129,7 +182,7 @@ async function moveFile(fileId, originalFolderId) {
     try {
         await drive.files.update({
             fileId: fileId,
-            addParents: '1tX81xp_-sdNwwKM4tj9Rir6mYsmgOYwA',
+            addParents: process.env.FOLDER_ID_PARENT,
             removeParents: originalFolderId,
             fields: 'id, parents',
             supportsAllDrives: true
@@ -142,14 +195,4 @@ async function moveFile(fileId, originalFolderId) {
     }
 }
 
-module.exports = {listFolderFiles, extractTextFromGoogleDoc, extractShortSummary, moveFile};
-
-
-
-
-
-// Para rodar periodicamente (exemplo a cada 10 minutos)
-// const POLLING_INTERVAL_MS = 10 * 60 * 1000;
-// console.log(`Iniciando verificação periódica a cada ${POLLING_INTERVAL_MS / 1000 / 60} minutos...`);
-// setInterval(main, POLLING_INTERVAL_MS);
-// main(); // Executa uma vez imediatamente
+module.exports = {listFolderFiles, extractTextFromGoogleDoc, extractShortSummary, moveFile, extractTranscription};

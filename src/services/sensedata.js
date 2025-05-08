@@ -82,9 +82,14 @@ async function registerTaskSenseData(cliente, descricao, emailCliente, titulo) {
     if (response.status === 202) {
       console.log('✅ Atividade registrada com sucesso no SenseData!');
       return true;
+    } else if (response.status === 400) {
+      console.log('❌ Erro ao registrar atividade no SenseData:', response.data);
+      return true
     } else {
       throw new Error(`Código de status: ${response.status}`);
     }
+
+    
   } catch (error) {
     console.error('Detalhes do erro:', error.response?.data);
     throw new Error(`Erro ao registrar atividade no SenseData: ${error.message}`);
@@ -155,7 +160,7 @@ async function searchIdUserSenseData(emailCliente) {
         limit: 1000
       },
       headers: {
-        'Authorization': 'Bearer OWVkM2UwNzkwYTM0ZjY0Zjg2YmUwYjViNDUyNWRmZWM='
+        'Authorization': `Bearer ${sensedataToken}`
       },
       httpsAgent: new https.Agent({ rejectUnauthorized: false })
     });
