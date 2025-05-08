@@ -6,6 +6,12 @@ const {registerTaskSenseData} = require('./services/sensedata.js');
 async function main() {
     const allFiles = await listFolderFiles(process.env.FOLDER_ID);
     const today = new Date().toISOString().split('T')[0]; // Formato YYYY-MM-DD
+
+    const ontem = new Date();
+    ontem.setDate(ontem.getDate() - 1);
+    const diaAnterior = ontem.toISOString().split('T')[0];
+    
+    console.log(diaAnterior); // Ex: "2025-05-07"
     
     if (!allFiles || allFiles.length === 0) {
         console.log('Nenhum arquivo encontrado na pasta.');
@@ -17,7 +23,7 @@ async function main() {
     const todayFiles = allFiles.filter(file => {
         // Converte a data de criação do arquivo para o mesmo formato
         const fileDate = new Date(file.createdTime).toISOString().split('T')[0];
-        return fileDate === today;
+        return fileDate === diaAnterior;
     });
     
     if (todayFiles.length === 0) {
